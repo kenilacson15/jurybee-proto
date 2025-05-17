@@ -3261,3 +3261,14 @@ agents.risk_analyst.ResponseParseError: Failed to parse response: asdict() shoul
 2025-05-14 01:46:30,481 - INFO - [ToT] Evaluating path 3: Public exception
 2025-05-14 01:46:30,481 - INFO - [ToT] Analyzing clause: Confidentiality lasts indefinitely for all information disclosed. except for public knowledge
 2025-05-14 01:46:34,029 - INFO - [ToT] Best path: Standard duration (Score: 0.62)
+2025-05-15 08:14:56,847 - INFO - [ToT] Use pytorch device_name: cpu
+2025-05-15 08:14:56,849 - INFO - [ToT] Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-05-15 08:15:02,782 - WARNING - [ToT] Patterns file not found at C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\data\nda_corpus\patterns.json. Using defaults.
+2025-05-15 08:15:02,784 - INFO - [ToT] Generating 3 paths for clause: Confidentiality lasts indefini...
+2025-05-15 08:15:02,785 - INFO - [ToT] Evaluating path 1: Literal
+2025-05-15 08:15:02,785 - INFO - [ToT] Analyzing clause: Confidentiality lasts indefinitely for all information disclosed.
+2025-05-15 08:15:09,183 - INFO - [ToT] Evaluating path 2: Standard duration
+2025-05-15 08:15:09,184 - INFO - [ToT] Analyzing clause: Confidentiality lasts for 5 years for all information disclosed.
+2025-05-15 08:15:13,793 - INFO - [ToT] Evaluating path 3: Public exception
+2025-05-15 08:15:13,794 - INFO - [ToT] Analyzing clause: Confidentiality lasts indefinitely for all information disclosed. except for public knowledge
+2025-05-15 08:15:17,568 - INFO - [ToT] Best path: Standard duration (Score: 0.62)
