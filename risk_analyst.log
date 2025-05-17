@@ -1,0 +1,145 @@
+2025-05-17 19:56:12,936 - ERROR - [RISK] Crew execution failed: 1 validation error for Crew
+verbose
+  Input should be a valid boolean, unable to interpret input [type=bool_parsing, input_value=2, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.11/v/bool_parsing
+Traceback (most recent call last):
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\main_crew.py", line 29, in analyze_clause
+    crew = Crew(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Crew
+verbose
+  Input should be a valid boolean, unable to interpret input [type=bool_parsing, input_value=2, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.11/v/bool_parsing
+2025-05-17 20:13:17,256 - ERROR - [RISK] LiteLLM call failed: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=models/gemini-1.5-flash
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-05-17 20:13:17,260 - ERROR - [RISK] Crew execution failed: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=models/gemini-1.5-flash
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+Traceback (most recent call last):
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\main_crew.py", line 35, in analyze_clause
+    result = crew.kickoff()
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\crew.py", line 663, in kickoff
+    result = self._run_sequential_process()
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\crew.py", line 775, in _run_sequential_process
+    return self._execute_tasks(self.tasks)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\crew.py", line 878, in _execute_tasks
+    task_output = task.execute_sync(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\task.py", line 347, in execute_sync
+    return self._execute_core(agent, context, tools)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\task.py", line 491, in _execute_core
+    raise e  # Re-raise the exception after emitting the event
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\task.py", line 411, in _execute_core
+    result = agent.execute_task(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agent.py", line 387, in execute_task
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agent.py", line 363, in execute_task
+    result = self._execute_without_timeout(task_prompt, task)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agent.py", line 459, in _execute_without_timeout
+    return self.agent_executor.invoke(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 123, in invoke
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 112, in invoke
+    formatted_answer = self._invoke_loop()
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 208, in _invoke_loop
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 155, in _invoke_loop
+    answer = get_llm_response(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\utilities\agent_utils.py", line 157, in get_llm_response
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\utilities\agent_utils.py", line 148, in get_llm_response
+    answer = llm.call(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\llm.py", line 890, in call
+    return self._handle_non_streaming_response(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\llm.py", line 729, in _handle_non_streaming_response
+    response = litellm.completion(**params)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\utils.py", line 1255, in wrapper
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\utils.py", line 1133, in wrapper
+    result = original_function(*args, **kwargs)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\main.py", line 3216, in completion
+    raise exception_type(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\main.py", line 1031, in completion
+    model, custom_llm_provider, dynamic_api_key, api_base = get_llm_provider(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\litellm_core_utils\get_llm_provider_logic.py", line 360, in get_llm_provider
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\litellm_core_utils\get_llm_provider_logic.py", line 337, in get_llm_provider
+    raise litellm.exceptions.BadRequestError(  # type: ignore
+litellm.exceptions.BadRequestError: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=models/gemini-1.5-flash
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-05-17 20:33:21,111 - ERROR - [RISK] LiteLLM call failed: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=models/gemini-1.5-flash
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-05-17 20:33:21,118 - ERROR - [RISK] Crew execution failed: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=models/gemini-1.5-flash
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+Traceback (most recent call last):
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\main_crew.py", line 35, in analyze_clause
+    result = crew.kickoff()
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\crew.py", line 663, in kickoff
+    result = self._run_sequential_process()
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\crew.py", line 775, in _run_sequential_process
+    return self._execute_tasks(self.tasks)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\crew.py", line 878, in _execute_tasks
+    task_output = task.execute_sync(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\task.py", line 347, in execute_sync
+    return self._execute_core(agent, context, tools)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\task.py", line 491, in _execute_core
+    raise e  # Re-raise the exception after emitting the event
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\task.py", line 411, in _execute_core
+    result = agent.execute_task(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agent.py", line 387, in execute_task
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agent.py", line 363, in execute_task
+    result = self._execute_without_timeout(task_prompt, task)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agent.py", line 459, in _execute_without_timeout
+    return self.agent_executor.invoke(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 123, in invoke
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 112, in invoke
+    formatted_answer = self._invoke_loop()
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 208, in _invoke_loop
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\agents\crew_agent_executor.py", line 155, in _invoke_loop
+    answer = get_llm_response(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\utilities\agent_utils.py", line 157, in get_llm_response
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\utilities\agent_utils.py", line 148, in get_llm_response
+    answer = llm.call(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\llm.py", line 890, in call
+    return self._handle_non_streaming_response(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\crewai\llm.py", line 729, in _handle_non_streaming_response
+    response = litellm.completion(**params)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\utils.py", line 1255, in wrapper
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\utils.py", line 1133, in wrapper
+    result = original_function(*args, **kwargs)
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\main.py", line 3216, in completion
+    raise exception_type(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\main.py", line 1031, in completion
+    model, custom_llm_provider, dynamic_api_key, api_base = get_llm_provider(
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\litellm_core_utils\get_llm_provider_logic.py", line 360, in get_llm_provider
+    raise e
+  File "C:\Users\Ken Ira Talingting\Desktop\jurybee-proto\.venv\lib\site-packages\litellm\litellm_core_utils\get_llm_provider_logic.py", line 337, in get_llm_provider
+    raise litellm.exceptions.BadRequestError(  # type: ignore
+litellm.exceptions.BadRequestError: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=models/gemini-1.5-flash
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-05-17 20:33:21,225 - ERROR - [RISK] HTTPSConnectionPool(host='telemetry.crewai.com', port=4319): Max retries exceeded with url: /v1/traces (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000120C22562F0>: Failed to resolve 'telemetry.crewai.com' ([Errno 11001] getaddrinfo failed)"))
+2025-05-17 20:51:06,648 - INFO - [RISK] 
+LiteLLM completion() model= gemini-1.5-flash; provider = gemini
+2025-05-17 20:51:12,433 - INFO - [RISK] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCjasG9mbpcF9lyIzF3PN55kqHJO2LwnU0 "HTTP/1.1 200 OK"
+2025-05-17 20:51:12,445 - INFO - [RISK] Wrapper: Completed Call, calling success_handler
+2025-05-17 20:51:12,447 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:12,447 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:12,459 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:12,500 - INFO - [RISK] 
+LiteLLM completion() model= gemini-1.5-flash; provider = gemini
+2025-05-17 20:51:16,334 - INFO - [RISK] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCjasG9mbpcF9lyIzF3PN55kqHJO2LwnU0 "HTTP/1.1 200 OK"
+2025-05-17 20:51:16,342 - INFO - [RISK] Wrapper: Completed Call, calling success_handler
+2025-05-17 20:51:16,343 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:16,343 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:16,347 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:16,447 - INFO - [RISK] 
+LiteLLM completion() model= gemini-1.5-flash; provider = gemini
+2025-05-17 20:51:23,824 - INFO - [RISK] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCjasG9mbpcF9lyIzF3PN55kqHJO2LwnU0 "HTTP/1.1 200 OK"
+2025-05-17 20:51:23,826 - INFO - [RISK] Wrapper: Completed Call, calling success_handler
+2025-05-17 20:51:23,826 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:23,826 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
+2025-05-17 20:51:23,837 - INFO - [RISK] selected model name for cost calculation: gemini/gemini-1.5-flash
