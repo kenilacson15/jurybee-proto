@@ -1,0 +1,40 @@
+# ================================
+# Requires Python 3.10
+# ================================
+# (pip will refuse to install if python_version != "3.10")
+  
+python_version >= "3.10"
+
+# --- Core AI & Agent Frameworks ---
+langchain>=0.2.0
+langchain-google-vertexai>=2.0.24
+llama-index==0.12.36
+google-generativeai==0.8.5
+crewai>=0.29.0
+
+# --- Vector DB & Embeddings ---
+pinecone-client==3.2.2
+torch==2.1.0        # CPU/GPU builds both compatible with 3.10
+
+# --- Legal NLP ---
+transformers==4.41.2
+sentence-transformers>=2.7.0,<3.0.0
+
+
+# --- Visualization & Architecture ---
+matplotlib==3.8.0
+networkx==3.2.1
+
+# --- Blockchain ---
+web3==6.15.1
+
+# --- OCR (Google Vision API) ---
+google-cloud-vision==3.10.1
+
+# --- Dev Tools ---
+jupyter==1.0.0
+python-dotenv==1.0.1
+
+# --- Additional Core Dependencies ---
+tqdm==4.66.2
+numpy==1.26.4
