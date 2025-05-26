@@ -60,7 +60,6 @@ class ComplianceCheckerAgent:
 
         self.ocr_lang = 'eng'  # Default OCR language
 
-
     def _initialize_model(self):
         if not self.api_key:
             raise ValueError("GEMINI_API_KEY not found in environment variables")
