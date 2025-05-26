@@ -6,7 +6,11 @@ from typing import Optional, Literal
 from dotenv import load_dotenv
 from pydantic import BaseModel, ValidationError
 from core.schemas import ComplianceResult  # Instead of from tools
-  # Abstract interface
+# OCR and PDF/image processing imports
+import pytesseract
+from pdf2image import convert_from_path
+from PIL import Image
+import tempfile
 
 # LangChain imports
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -53,6 +57,8 @@ class ComplianceCheckerAgent:
 
         # Now build the agentic chain (which uses parse_success_rate & last_updated)
         self.chain = self._build_agentic_chain()
+
+        self.ocr_lang = 'eng'  # Default OCR language
 
 
     def _initialize_model(self):
@@ -148,6 +154,41 @@ class ComplianceCheckerAgent:
         """Enhanced LangChain-powered entry point"""
         return self.chain.invoke({"clause": clause})
 
+    def extract_text_from_file(self, file_path: str) -> str:
+        """Extract text from PDF or image file using OCR."""
+        ext = os.path.splitext(file_path)[1].lower()
+        if ext in ['.pdf']:
+            return self._extract_text_from_pdf(file_path)
+        elif ext in ['.png', '.jpg', '.jpeg', '.bmp', '.tiff']:
+            return self._extract_text_from_image(file_path)
+        else:
+            raise ValueError(f"Unsupported file type: {ext}")
+
+    def _extract_text_from_pdf(self, pdf_path: str) -> str:
+        """Convert PDF pages to images and extract text via OCR."""
+        text = []
+        with tempfile.TemporaryDirectory() as path:
+            images = convert_from_path(pdf_path, output_folder=path)
+            for img in images:
+                text.append(pytesseract.image_to_string(img, lang=self.ocr_lang))
+        return '\n'.join(text)
+
+    def _extract_text_from_image(self, image_path: str) -> str:
+        """Extract text from an image file using OCR."""
+        img = Image.open(image_path)
+        return pytesseract.image_to_string(img, lang=self.ocr_lang)
+
+    def check_compliance_from_file(self, file_path: str):
+        """Extracts text from a file (PDF/image), then checks compliance."""
+        try:
+            clause = self.extract_text_from_file(file_path)
+            if not clause.strip():
+                raise ComplianceError("No text extracted from file.")
+            return self.check_compliance(clause)
+        except Exception as e:
+            logging.error(f"OCR/File processing error: {e}")
+            raise ComplianceError(f"Failed to process file: {e}")
+
 # Usage example
 if __name__ == "__main__":
     agent = ComplianceCheckerAgent()
@@ -155,3 +196,6 @@ if __name__ == "__main__":
     result = agent.check_compliance(test_clause)
     print("⚖️ 2025 Agentic Compliance Report:")
     print(json.dumps(result.model_dump(), indent=2, ensure_ascii=False))
+    # Example for file upload (uncomment to use):
+    # file_result = agent.check_compliance_from_file('path_to_pdf_or_image.pdf')
+    # print(json.dumps(file_result.model_dump(), indent=2, ensure_ascii=False))

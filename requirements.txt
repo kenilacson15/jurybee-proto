@@ -2,9 +2,8 @@
 # Requires Python 3.10
 # ================================
 # (pip will refuse to install if python_version != "3.10")
+# python_version >= "3.10"  # Commented out for pip compatibility
   
-python_version >= "3.10"
-
 # --- Core AI & Agent Frameworks ---
 langchain>=0.2.0
 langchain-google-vertexai>=2.0.24
@@ -38,3 +37,8 @@ python-dotenv==1.0.1
 # --- Additional Core Dependencies ---
 tqdm==4.66.2
 numpy==1.26.4
+
+# --- OCR & PDF/Image Processing ---
+pytesseract
+pdf2image
+Pillow

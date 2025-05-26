@@ -3,7 +3,18 @@ from crewai import Agent
 from .negotiation_strategist import NegotiationStrategistAgent as BaseNegotiationStrategist
 
 class CrewNegotiationStrategist(Agent):
+    """
+    Agent specialized in negotiating contract clauses with a focus on risk management and compliance.
+    """
+
     def __init__(self, llm, verbose=True):
+        """
+        Initializes the negotiation strategist agent.
+
+        Args:
+            llm: The language model to be used by the agent.
+            verbose (bool): If True, enables verbose output for debugging.
+        """
         super().__init__(
             role="Negotiation Strategist",
             goal="Propose alternative wording for high-risk clauses",
@@ -14,8 +25,20 @@ class CrewNegotiationStrategist(Agent):
         )
 
     def _execute_task(self, task):
+        """
+        Accepts a clause and risk assessment for negotiation strategy.
+
+        Args:
+            task: An object containing the clause and its risk assessment.
+
+        Returns:
+            A dictionary with the proposed changes or an error message.
+        """
         clause = task.input.get("clause", "")
         risk_assessment = task.input.get("risk_assessment", {})
         base_agent = BaseNegotiationStrategist()
-        result = base_agent.run(clause, risk_assessment)
-        return result
+        try:
+            result = base_agent.run(clause, risk_assessment)
+            return result
+        except Exception as e:
+            return {"error": str(e)}
