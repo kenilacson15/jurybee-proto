@@ -18,8 +18,8 @@ class CrewComplianceChecker(Agent):
         Accepts either a text clause or a file path (PDF/image) for compliance checking.
         """
         base_agent = BaseComplianceChecker()
-        clause = task.input.get("clause", "")
-        file_path = task.input.get("file_path", None)
+        clause = task.data.get("clause", "")
+        file_path = task.data.get("file_path", None)
         try:
             if file_path:
                 result = base_agent.check_compliance_from_file(file_path)

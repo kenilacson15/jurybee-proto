@@ -31,7 +31,7 @@ class CrewRiskAnalyst(Agent):
         :param task: The task containing the clause to be analyzed.
         :return: Risk assessment result or error message.
         """
-        clause = task.input.get("clause", "")
+        clause = task.data.get("clause", "")
         base_agent = BaseRiskAnalyst()  # Instantiate only when needed
         try:
             result = base_agent.analyze_clause(clause)

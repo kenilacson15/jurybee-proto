@@ -53,9 +53,11 @@ if st.button("Analyze Compliance", use_container_width=True):
                     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
                         tmp_file.write(file.read())
                         tmp_path = tmp_file.name
-                    result = agent._execute_task(type('Task', (), {'input': {'file_path': tmp_path}})())
+                    from core.task import Task
+                    result = agent._execute_task(Task(data={'file_path': tmp_path}))
                 elif clause.strip():
-                    result = agent._execute_task(type('Task', (), {'input': {'clause': clause}})())
+                    from core.task import Task
+                    result = agent._execute_task(Task(data={'clause': clause}))
                 else:
                     st.warning("Please provide a clause or upload a file.")
                     st.stop()

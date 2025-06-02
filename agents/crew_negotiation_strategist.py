@@ -34,8 +34,8 @@ class CrewNegotiationStrategist(Agent):
         Returns:
             A dictionary with the proposed changes or an error message.
         """
-        clause = task.input.get("clause", "")
-        risk_assessment = task.input.get("risk_assessment", {})
+        clause = task.data.get("clause", "")
+        risk_assessment = task.data.get("risk_assessment", {})
         base_agent = BaseNegotiationStrategist()
         try:
             result = base_agent.run(clause, risk_assessment)
